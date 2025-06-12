@@ -1,0 +1,19 @@
+#message-form {
+    display: flex;
+    flex-flow: row;
+    height: 30px;
+    padding: 10px;
+    background-color: var(--color-tertiary);
+}
+
+#message-input {
+    width: 80%;
+    height: 100%;
+    background-color: var(--color-secondary);
+}
+
+#send-button {
+    width: 20%;
+    height: 100%;
+    background-color: var(--color-primary);
+}

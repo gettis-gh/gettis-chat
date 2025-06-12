@@ -1,0 +1,55 @@
+html {
+    background-color: var(--color-tertiary);
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Ajustes generales */
+  html, body {
+    height: 100%;
+    font-family: sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Eliminar estilos por defecto de listas */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* Eliminar estilos por defecto de enlaces */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Imágenes fluidas */
+  img, picture {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Formularios sin estilos */
+  input, button, textarea, select {
+    font: inherit;
+    border: none;
+    outline: none;
+    background: none;
+  }
+  
+  /* Botones clicables */
+  button {
+    cursor: pointer;
+  }
+  
+  /* Tablas sin bordes por defecto */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
