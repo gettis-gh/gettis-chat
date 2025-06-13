@@ -21,3 +21,15 @@ export const findUserIdByUsername = async (username) => {
     return internalError("Error trying to find user.", error.message);
   }
 };
+
+export const findUsernameByUserId = async (userId) => {
+  try {
+    const user = await User.findByPk(userId); // Busca por clave primaria (id)
+    if (!user) {
+      return internalError("User not found.");
+    }
+    return success("User found.", { username: user.username });
+  } catch (error) {
+    return internalError("Error trying to find user.", error.message);
+  }
+};

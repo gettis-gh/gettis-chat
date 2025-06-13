@@ -1,9 +1,11 @@
 import { renderMessages } from "./msgManager.js";
 
-export class ChatSocket {
+  export class ChatSocket {
     constructor(url) {
       this.url = url;
       this.socket = new WebSocket(url);
+  
+      this.handlers = new Map(); // Manejadores por tipo
   
       this.socket.addEventListener('open', this.onOpen.bind(this));
       this.socket.addEventListener('message', this.onMessage.bind(this));
@@ -11,31 +13,28 @@ export class ChatSocket {
       this.socket.addEventListener('error', this.onError.bind(this));
     }
   
-    onOpen(event) {
+    // Registrar un handler para un tipo de mensaje
+    on(type, handler) {
+      this.handlers.set(type, handler);
+    }
+  
+    onOpen() {
       console.log('Socket conectado');
-      this.send({ type: 'init', user: 'melooo' });
     }
   
     onMessage(event) {
+      try {
         const message = JSON.parse(event.data);
+        const handler = this.handlers.get(message.type);
   
-        switch (message.type) {
-            case "alert":
-            if (message.content === "new-message") {
-                this.socket.send(JSON.stringify({
-                type: "get-messages",
-                content: { amount: 50 }
-                }));
-            }
-            break;
-      
-          case "return-messages":
-            renderMessages(message.content, document.getElementById("message-container"));
-            break;
-      
-          default:
-            console.warn("Mensaje desconocido:", message);
+        if (handler) {
+          handler(message.content, message);
+        } else {
+          console.warn('Sin handler para mensaje tipo:', message.type, message);
         }
+      } catch (err) {
+        console.error("Error parsing message", event.data, err);
+      }
     }
   
     onClose(event) {
@@ -51,4 +50,3 @@ export class ChatSocket {
       this.socket.send(str);
     }
   }
-  

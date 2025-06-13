@@ -1,14 +1,16 @@
 import { WebSocketServer } from "ws";
 import url from 'url';
+import { findUsernameByUserId } from "./controller/user.controller.js";
 
 export function createWebSocketServer(httpServer) {
     const wss = new WebSocketServer({ server: httpServer });
-    const clients = new Map();
     const messages = [];
 
-    wss.on('connection', (ws, req) => {
+    wss.on('connection', async (ws, req) => {
         const {userId} = url.parse(req.url, true).query;
-        clients.set(ws, { userId });
+        const usernameRes = await findUsernameByUserId(userId);
+        const username = usernameRes.attachData.username;
+        console.log(JSON.stringify(username));
 
         ws.on('message', (data) => {
             const rawMessage = data.toString();
@@ -26,12 +28,11 @@ export function createWebSocketServer(httpServer) {
                         const messageToSave = {
                             message: userMessage.text,
                             metadata: {
-                                author: `[${userId}]`,
+                                author: `[${username}]`,
                                 time: `@${hour}`
                             }
                         };
-
-                        console.log("guardar mensaje maravilllosamente");                       
+                 
                         messages.push(messageToSave);
 
                         const responseMessage = JSON.stringify({

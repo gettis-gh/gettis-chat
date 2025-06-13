@@ -1,0 +1,63 @@
+.identify-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  
+    padding: var(--padding);
+    width: 100%;
+    max-width: 320px;
+    font-family: inherit;
+  }
+  
+  .identify-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .identify-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+  }
+  
+  .identify-prompt {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.85;
+  }
+  
+  .identify-form {
+    display: flex;
+    gap: var(--padding);
+  }
+  
+  #identify-input {
+    flex: 1;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.5rem;
+  }
+  
+  #identify-input::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+  }
+  
+  #identify-button {
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  
+  #identify-button:hover {
+    background-color: var(--hover-color);
+  }
+  

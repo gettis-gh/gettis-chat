@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
             );
     }
 
-    res.cookie("user", JSON.stringify({ username, userId }));
+    res.cookie("user", JSON.stringify({ username, userId: userId.attachData.id }));
 
     return res
         .status(200)

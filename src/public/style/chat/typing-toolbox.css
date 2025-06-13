@@ -3,23 +3,6 @@
     gap: var(--padding);
   }
   
-  #message-input {
-    flex: 1;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 0.3rem 0.5rem;
-  }
-  
-  #send-button,
-  #add-msg {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 0.3rem 0.6rem;
-    cursor: pointer;
-  }
-  
   #send-button:hover,
   #add-msg:hover {
     background-color: var(--hover-color);

@@ -59,3 +59,19 @@ html {
     background-color: var(--bg-color);
     color: var(--text-color);
   }
+
+  input {
+    flex: 1;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.5rem;
+  }
+
+  button {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
