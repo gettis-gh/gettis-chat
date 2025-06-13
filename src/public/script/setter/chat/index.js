@@ -1,6 +1,10 @@
 import { ChatSocket } from '../../../service/socketManager.js';
 
-const socket = new ChatSocket("ws://localhost:3000");
+const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const host = window.location.host; // incluye host:puerto
+const socketUrl = `${protocol}//${host}`;
+
+const socket = new ChatSocket(socketUrl);
 
 socket.onMessage = function (event) {
     const message = JSON.parse(event.data);
