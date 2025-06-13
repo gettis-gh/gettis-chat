@@ -12,6 +12,6 @@
     "dev": "nodemon -r dotenv/config server.js",
     "start": "node server.js",
     "build": "echo \"No build step required\""
-  }
+  },
   "type": "module"
 }
