@@ -1,9 +1,9 @@
 // server.js
 import 'dotenv/config';
-import { createHttpServer } from './httpServer.js';
-import { createWebSocketServer } from './wsServer.js';
+import { createHttpServer } from './src/httpServer.js';
+import { createWebSocketServer } from './src/wsServer.js';
 
-import sequelize from './database/sequelize.js';
+import sequelize from './src/database/sequelize.js';
 
 (async () => {
   try {
