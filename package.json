@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "nodemon -r dotenv/config server.js",
-    "start": "node server.js",
+    "start": "node src/server.js",
     "build": "echo \"No build step required\""
   },
   "type": "module"
