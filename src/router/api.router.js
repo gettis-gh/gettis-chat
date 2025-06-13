@@ -14,18 +14,34 @@ router.post('/register', async (req, res) => {
         const { username } = req.body;
 
         if (!username) {
-            return res.status(400).json(badRequest("Username not provided."));
+            return res
+                .status(400)
+                .json(
+                    badRequest("Username not provided.")
+                );
         }
 
         const result = await createUser(username);
 
         if (result.error) {
-            return res.status(result.status || 500).json(internalError(result.message, result));
+            return res
+                .status(result.status || 500)
+                .json(
+                    internalError(result.message, result)
+                );
         }
 
-        return res.status(result.status || 200).json(success(result.message, result.attachData));
+        return res
+            .status(result.status || 200)
+            .json(
+                success(result.message, result.attachData)
+            );
     } catch (error) {
-        return res.status(500).json(internalError(error.message));
+        return res
+            .status(500)
+            .json(
+                internalError(error.message)
+            );
     }   
 })
 
@@ -33,20 +49,31 @@ router.post('/login', async (req, res) => {
     const { username } = req.body;  
 
     if (!username) {
-        return res.status(400).json(badRequest("Username not provided."));
+        return res 
+            .status(400)
+            .json(
+                badRequest("Username not provided.")
+            );
     }
 
     const userId = await findUserIdByUsername(username);
-    console.log("este es el userId: " + JSON.stringify(userId, null, 2));
 
     if (userId.error || !userId) {
         console.log("usuario no encontrao");
-        return res.status(500).json(internalError("Error trying to obtain userId.", userId || null));
+        return res
+            .status(500)
+            .json(
+                internalError("Error trying to obtain userId.", userId || null)
+            );
     }
 
     res.cookie("user", JSON.stringify({ username, userId }));
 
-    return res.status(200).json(success("Cookie 'user' asigned correctly.", ))
+    return res
+        .status(200)
+        .json(
+            success("Cookie 'user' asigned correctly.")
+        );
 });
 
 export default router;

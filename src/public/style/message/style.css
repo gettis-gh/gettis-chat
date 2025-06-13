@@ -1,0 +1,19 @@
+.message {
+    margin-bottom: 0.5rem;
+  }
+  
+  .message-content {
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+  
+  .message-meta {
+    font-size: 0.8rem;
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+  
+  .message-meta span {
+    color: var(--text-color);
+  }

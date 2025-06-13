@@ -1,0 +1,16 @@
+#message-container {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px dashed var(--border-color);
+    padding: var(--padding);
+    margin-bottom: var(--padding);
+    white-space: pre-wrap;
+  }
+  
+  #message-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #message-container::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+  }

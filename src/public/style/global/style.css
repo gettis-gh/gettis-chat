@@ -53,3 +53,9 @@ html {
     border-collapse: collapse;
     border-spacing: 0;
   }
+  
+  body {
+    font-family: var(--font);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }

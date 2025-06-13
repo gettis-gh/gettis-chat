@@ -1,5 +1,8 @@
 :root {
-    --color-primary: darkgray;
-    --color-secondary: lightgray;
-    --color-tertiary: gray;
-}
+    --bg-color: #000000;
+    --text-color: #00ff00;
+    --border-color: #00ff00;
+    --hover-color: #002200;
+    --font: monospace;
+    --padding: 0.5rem;
+  }

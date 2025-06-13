@@ -1,19 +1,32 @@
-#message-form {
+#typing-toolbox {
     display: flex;
-    flex-flow: row;
-    height: 30px;
-    padding: 10px;
-    background-color: var(--color-tertiary);
-}
-
-#message-input {
-    width: 80%;
-    height: 100%;
-    background-color: var(--color-secondary);
-}
-
-#send-button {
-    width: 20%;
-    height: 100%;
-    background-color: var(--color-primary);
-}
+    gap: var(--padding);
+  }
+  
+  #message-input {
+    flex: 1;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.5rem;
+  }
+  
+  #send-button,
+  #add-msg {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  
+  #send-button:hover,
+  #add-msg:hover {
+    background-color: var(--hover-color);
+  }
+  
+  #message-input::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+  }
+  

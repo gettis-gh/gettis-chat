@@ -1,23 +1,73 @@
 import { WebSocketServer } from "ws";
+import url from 'url';
 
 export function createWebSocketServer(httpServer) {
     const wss = new WebSocketServer({ server: httpServer });
+    const clients = new Map();
+    const messages = [];
 
-    wss.on('connection', (ws) => {
+    wss.on('connection', (ws, req) => {
+        const {userId} = url.parse(req.url, true).query;
+        clients.set(ws, { userId });
+
         ws.on('message', (data) => {
-            const message = data.toString();
+            const rawMessage = data.toString();
+            
+            try {
+                const message = JSON.parse(rawMessage);
 
-            if (message === "ping") {
-                ws.send("pong!");
-            } else {
-                ws.send(`Echo: ${message}`);
+                switch (message.type) {
+                    case "new-message":
+                        const userMessage = message.content;
 
-                wss.clients.forEach(client => {
-                    if (client.readyState === client.OPEN) {
-                        client.send(`new-message`);
-                    }
-                });
-            }
+                        const now = new Date();
+                        const hour = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                        const messageToSave = {
+                            message: userMessage.text,
+                            metadata: {
+                                author: `[${userId}]`,
+                                time: `@${hour}`
+                            }
+                        };
+
+                        console.log("guardar mensaje maravilllosamente");                       
+                        messages.push(messageToSave);
+
+                        const responseMessage = JSON.stringify({
+                            type: "alert",
+                            content: "new-message"
+                        });
+                        wss.clients.forEach(client => {
+                            if (client.readyState === client.OPEN) {
+                                client.send(responseMessage);
+                            }
+                        });
+                        break;
+
+                    case "get-messages":
+                        const query = message.content;
+
+                        const resMessages = messages.slice(-Math.min(messages.length, query.amount));
+
+                        const response = JSON.stringify({
+                            type: "return-messages",
+                            content: resMessages
+                        });
+                        ws.send(response);
+                        break;
+
+                    case "load-profile":
+                        console.log("cargando perfil de manera maravillosa");
+                        break;
+
+                    default:
+                        break;
+                }
+            } catch (error) {
+                const response = { reply: 'Error trying to parse.', original: rawMessage };
+                ws.send(JSON.stringify(response));
+            }   
         });
     });
 
