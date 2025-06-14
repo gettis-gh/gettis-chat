@@ -43,6 +43,9 @@ function startChat(userId) {
         });
 
         renderMessages(formattedMsgList, document.getElementById("message-container"));
+
+        const container = document.getElementById("message-container");
+        container.scrollTop = container.scrollHeight;
     });
 
     document.getElementById("send-button").addEventListener("click", (event) => {
