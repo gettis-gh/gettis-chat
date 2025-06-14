@@ -55,8 +55,10 @@ function renderMessageTree(messageTree, container) {
 export function renderMessages(messagesList, messageContainer) {
   messageContainer.innerHTML = '';
 
+  const reversedList = [...messagesList].reverse();
+
   // Construimos el árbol jerárquico
-  const tree = buildMessageTree(messagesList);
+  const tree = buildMessageTree(reversedList);
 
   // Renderizamos el árbol
   renderMessageTree(tree, messageContainer);

@@ -27,7 +27,7 @@ export async function getMessages(query = {}) {
   try {
     const messages = await Message.findAll({
       limit: amount,
-      order: [['timestamp', 'ASC']]
+      order: [['timestamp', 'DESC']]
     });
 
     return success("Messages retrieved successfully.", messages);
