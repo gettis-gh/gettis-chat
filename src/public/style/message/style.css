@@ -37,13 +37,19 @@
     border: 2px solid transparent; /* ocupa espacio pero no se ve */
     transition: border-color 0.3s ease;
   }
-  
-  .message.hovered {
-    border-color: lightgreen;
-  }
 
   .message.selected {
     background-color: rgba(150, 255, 150, 0.10);
     border-color: lightgreen;
     border-style: inset;
   }
+
+  .message.hovered {
+    border-color: lightgreen;
+  }
+
+  .message-content img.message-media {
+    max-width: 100%;
+    max-height: 300px;
+    display: block; /* para evitar alineamiento inline raro */
+}

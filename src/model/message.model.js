@@ -9,20 +9,20 @@ const Message = sequelize.define('message', {
     primaryKey: true
   },
   content: {
-    type: DataTypes.TEXT, // el contenido del mensaje
+    type: DataTypes.TEXT,
     allowNull: false
   },
   type: {
-    type: DataTypes.STRING, // tipo: text, image, etc.
+    type: DataTypes.STRING,
     allowNull: false
   },
   author: {
-    type: DataTypes.STRING, // o UUID si usas usuarios
+    type: DataTypes.STRING,
     allowNull: false
   },
   parentId: {
     type: DataTypes.UUID,
-    allowNull: true // null si no responde a otro mensaje
+    allowNull: true
   },
   timestamp: {
     type: DataTypes.DATE,
