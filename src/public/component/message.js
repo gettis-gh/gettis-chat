@@ -1,3 +1,40 @@
+function buildMetadataElement(metadata, displayConfig) {
+    const container = document.createElement('div');
+    container.classList.add('message-meta');
+
+    for (const key in metadata) {
+        if (displayConfig[key] === 'hide') continue;
+
+        const span = document.createElement('span');
+        span.classList.add(`meta-${key}`);
+
+        const value = metadata[key];
+        const style = displayConfig[key] || 'normal';
+
+        applyDisplayStyle(span, style);
+        span.textContent = value;
+
+        container.appendChild(span);
+    }
+
+    return container;
+}
+
+function applyDisplayStyle(element, style) {
+    switch (style) {
+        case 'highlight':
+            element.style.color = 'lime';
+            element.style.fontWeight = 'bold';
+            break;
+        case 'dim':
+            element.style.opacity = 0.6;
+            break;
+        case 'normal':
+        default:
+            // sin estilo extra
+            break;
+    }
+}
 export function createMessage(content, metadata = {}, displayConfig = {}) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('message');
@@ -6,45 +43,12 @@ export function createMessage(content, metadata = {}, displayConfig = {}) {
         wrapper.dataset.id = metadata.id;
     }
 
-    // Contenedor de metadatos
-    const metaContainer = document.createElement('div');
-    metaContainer.classList.add('message-meta');
-
-    for (const key in metadata) {
-        if (displayConfig[key] == 'hide') {
-            continue;
-        }
-        
-        const span = document.createElement('span');
-        span.classList.add(`meta-${key}`);
-
-        const value = metadata[key];
-        const style = displayConfig[key] || 'normal';
-
-        switch (style) {
-            case 'highlight':
-                span.style.color = 'lime';
-                span.style.fontWeight = 'bold';
-                break;
-            case 'dim':
-                span.style.opacity = 0.6;
-                break;
-            case 'normal':
-            default:
-                // sin estilo extra
-                break;
-        }
-
-        span.textContent = value;
-        metaContainer.appendChild(span);
-    }
+    const metaContainer = buildMetadataElement(metadata, displayConfig);
     wrapper.appendChild(metaContainer);
 
-    // Línea del mensaje
     const messageBody = document.createElement('div');
     messageBody.classList.add('message-content');
     messageBody.textContent = `> ${content}`;
-
     wrapper.appendChild(messageBody);
 
     return wrapper;

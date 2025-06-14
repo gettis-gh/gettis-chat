@@ -28,6 +28,10 @@ export function createWebSocketServer(httpServer) {
         ws.on('message', async (data) => {
             await handleMessage(ws, data, context);
         });
+
+        ws.send(JSON.stringify({
+            type: "ready"
+        }));
     });
 
     return wss;

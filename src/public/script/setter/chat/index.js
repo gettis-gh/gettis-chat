@@ -10,11 +10,15 @@ function startChat(userId) {
     const socketUrl = `${protocol}//${host}`;
 
     const socket = new ChatSocket(`${socketUrl}?userId=${userId}`);
+    
+    socket.on('ready', () => {
+        socket.send({ type: "get-messages", content: { amount: 50 } });
+    });
 
     socket.on("alert", (content) => {
-    if (content === "new-message") {
-        socket.send({ type: "get-messages", content: { amount: 50 } });
-    }
+        if (content === "new-message") {
+            socket.send({ type: "get-messages", content: { amount: 50 } });
+        }
     });
 
     socket.on("return-messages", (rawMsgList) => {
@@ -139,3 +143,46 @@ textarea.addEventListener('keydown', (e) => {
 function setReplyTarget(messageId) {
     window.replyTarget = messageId;
 }
+
+messageContainer.addEventListener('mouseover', (event) => {
+  // Buscar el mensaje .message más cercano desde event.target
+  const closestMessage = event.target.closest('.message');
+  if (!closestMessage) return;
+
+  // Evitar acción si ya está hovered
+  if (closestMessage.classList.contains('hovered')) return;
+
+  // Quitar hovered a todos los mensajes
+  messageContainer.querySelectorAll('.message.hovered').forEach(el => {
+    el.classList.remove('hovered');
+  });
+
+  // Añadir hovered solo al más cercano
+  closestMessage.classList.add('hovered');
+});
+
+messageContainer.addEventListener('mouseout', (event) => {
+  // Quitar hovered del mensaje al que se sale el mouse
+  const related = event.relatedTarget;
+  const fromMessage = event.target.closest('.message');
+
+  if (!fromMessage) return;
+
+  // Si el mouse sale a un elemento fuera del mensaje actual, quitar hovered
+  if (!fromMessage.contains(related)) {
+    fromMessage.classList.remove('hovered');
+  }
+});
+
+messageContainer.addEventListener('click', (event) => {
+    const clickedMessage = event.target.closest('.message');
+    if (!clickedMessage) return;
+  
+    // Quitar selected a todos
+    messageContainer.querySelectorAll('.message.selected').forEach(el => {
+      el.classList.remove('selected');
+    });
+  
+    // Añadir selected al clickeado
+    clickedMessage.classList.add('selected');
+  });
