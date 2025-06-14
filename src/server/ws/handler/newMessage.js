@@ -1,4 +1,5 @@
 import { createMessage } from "../../../controller/message.controller.js";
+import { handleCommand } from "./command.js";
 
 export async function handleNewMessage({ message, username, messages, wss }) {
 
@@ -6,6 +7,10 @@ export async function handleNewMessage({ message, username, messages, wss }) {
     const timestamp = now.toISOString();
 
     const userMessage = message.content.message;
+
+    if (userMessage.content.startsWith("/")) {
+        return await handleCommand({message: userMessage, wss});
+    }
 
     const messageToCreate = {
         content: userMessage.content,
@@ -25,7 +30,7 @@ export async function handleNewMessage({ message, username, messages, wss }) {
 
     const alert = JSON.stringify({
         type: "alert",
-        content: "new-message"
+        content: "updated-messages"
     });
 
     wss.clients.forEach(client => {

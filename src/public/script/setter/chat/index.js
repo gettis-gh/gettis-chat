@@ -16,7 +16,7 @@ function startChat(userId) {
     });
 
     socket.on("alert", (content) => {
-        if (content === "new-message") {
+        if (content === "updated-messages") {
             socket.send({ type: "get-messages", content: { amount: 50 } });
         }
     });
@@ -179,13 +179,13 @@ messageContainer.addEventListener('mouseout', (event) => {
 
 messageContainer.addEventListener('click', (event) => {
     const clickedMessage = event.target.closest('.message');
-    if (!clickedMessage) return;
-  
-    // Quitar selected a todos
     messageContainer.querySelectorAll('.message.selected').forEach(el => {
-      el.classList.remove('selected');
-    });
+        el.classList.remove('selected');
+      });
+    if (!clickedMessage) {
+        window.replyTarget = undefined;
+        return;
+      }
   
-    // Añadir selected al clickeado
     clickedMessage.classList.add('selected');
   });
