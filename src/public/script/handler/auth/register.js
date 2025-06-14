@@ -12,5 +12,5 @@ export async function handleRegister(event) {
 
     const result = await fetchRegister(username);
 
-    alert(JSON.stringify(result));
+    console.los(JSON.stringify(result));
 }

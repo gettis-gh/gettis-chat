@@ -1,7 +1,7 @@
 // server.js
 import 'dotenv/config';
-import { createHttpServer } from './src/httpServer.js';
-import { createWebSocketServer } from './src/wsServer.js';
+import { createHttpServer } from './src/server/http.js';
+import { createWebSocketServer } from './src/server/ws.js';
 
 import sequelize from './src/database/sequelize.js';
 

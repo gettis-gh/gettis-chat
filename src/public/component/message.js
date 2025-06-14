@@ -2,11 +2,19 @@ export function createMessage(content, metadata = {}, displayConfig = {}) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('message');
 
+    if (metadata.id) {
+        wrapper.dataset.id = metadata.id;
+    }
+
     // Contenedor de metadatos
     const metaContainer = document.createElement('div');
     metaContainer.classList.add('message-meta');
 
     for (const key in metadata) {
+        if (displayConfig[key] == 'hide') {
+            continue;
+        }
+        
         const span = document.createElement('span');
         span.classList.add(`meta-${key}`);
 

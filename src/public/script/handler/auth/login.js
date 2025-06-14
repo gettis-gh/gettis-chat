@@ -12,5 +12,5 @@ export async function handleLogin(event) {
 
     const result = await fetchLogin(username);
 
-    alert(JSON.stringify(result));
+    console.los(JSON.stringify(result));
 }
