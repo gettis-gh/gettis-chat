@@ -1,0 +1,61 @@
+.multimedia {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font);
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    user-select: text; /* que se pueda seleccionar texto */
+    max-width: 320px;   /* un poco más que el tamaño de la imagen/video para padding y bordes */
+    margin: 0.5rem 0.5rem; /* centra horizontalmente y espacio arriba y abajo */
+  }
+  
+  .multimedia-header {
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+  }
+
+  .multimedia-header {
+    color: var(--text-color);
+    font-family: var(--font);
+    font-size: 0.9rem;
+    padding-bottom: 0.3rem;
+    white-space: normal;         /* permite saltos de línea */
+    overflow-wrap: break-word;   /* quiebra palabras largas */
+    word-break: break-word;
+  }
+  
+  .multimedia-body {
+    margin-top: 0.3rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .multimedia-body img,
+  .multimedia-body video {
+    image-rendering: pixelated;
+    width: 300px;        /* ancho fijo */
+    height: 300px;       /* alto fijo para cuadrado */
+    border: 1px solid var(--border-color);
+    background-color: #111;
+    object-fit: cover;   /* recorta la imagen para llenar el cuadro */
+  }
+  
+  .multimedia-footer {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.25rem;
+    text-align: right;
+    font-style: italic;
+  }
+  

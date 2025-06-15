@@ -3,16 +3,11 @@ import { internalError, success } from '../service/response.service.js';
 
 // Crear mensaje
 export async function createMessage({ content, metadata }) {
-  const { type, parentId = null, author, timestamp } = metadata;
-
   try {
     const message = await Message.create({
       content,
-      type,
-      author,
-      parentId,
-      timestamp: new Date(timestamp)
-    });
+      metadata: metadata || {text:"text"}
+  });
 
     return success("Message created successfully.", message);
   } catch (error) {
@@ -25,9 +20,13 @@ export async function getMessages(query = {}) {
   const { amount = 50 } = query;
 
   try {
-    const messages = await Message.findAll({
-      limit: amount,
-      order: [['timestamp', 'DESC']]
+    const messages = await Message.findAll({limit: amount});
+
+    
+    messages.sort((a, b) => {
+      const tA = new Date(a.metadata?.timestamp || 0);
+      const tB = new Date(b.metadata?.timestamp || 0);
+      return tB - tA;
     });
 
     return success("Messages retrieved successfully.", messages);

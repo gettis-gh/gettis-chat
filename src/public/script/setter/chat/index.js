@@ -2,7 +2,7 @@ import {
     initChat, 
     setupChatHotkeys, 
     setupMessageEvents, 
-    setupTypingToolbox 
+    setupTypingToolbox,
 } from "./chat.js";
 
 (async () => await initChat())();

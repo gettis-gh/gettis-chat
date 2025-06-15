@@ -1,0 +1,23 @@
+.message-preview {
+    margin: 0.5rem;
+    border: 1px solid #90ee90; /* borde punteado verde claro para diferenciar */
+    padding: 0.5rem;
+    border-color: var(--border-color);
+    background-color: rgba(200, 255, 200, 0.1); /* verde muy suave de fondo */
+    font-style: italic; /* para darle un toque de “preview” */
+  }
+  
+  .message-preview-content {
+    white-space: pre-wrap;
+    color: var(--text-color);
+  }
+
+  .message-preview-meta {
+    font-size: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    color: var(--text-color);
+    opacity: 0.7; /* más tenue para no competir con el contenido */
+    font-weight: lighter;
+  }

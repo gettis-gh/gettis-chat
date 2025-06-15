@@ -31,9 +31,9 @@ function renderMessageTree(messageTree, container) {
   messageTree.forEach(msg => {
     const displayConfig = {
       author: 'highlight',
-      time: 'dim',
-      id: 'hide',
-      parentId: 'hide'
+      timestamp: 'dim',
+      quote: 'dim',
+      id: 'dim'
     };
 
     const msgElement = createMessage(msg.message, msg.metadata, displayConfig);

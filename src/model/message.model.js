@@ -12,21 +12,9 @@ const Message = sequelize.define('message', {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  type: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  author: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  parentId: {
-    type: DataTypes.UUID,
-    allowNull: true
-  },
-  timestamp: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+  metadata: {
+    type: DataTypes.JSON,
+    defaultValue: {text:"text"}
   }
 });
 
